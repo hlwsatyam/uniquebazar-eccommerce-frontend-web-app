@@ -14,6 +14,7 @@ const Admin = () => {
     discount_price: "",
     sold_by: "",
     feature_details: "",
+    category: "dry_fruits",
     description: "",
     product_information: "",
     return_time: "",
@@ -46,14 +47,14 @@ const Admin = () => {
     Object.entries(restFormData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
     });
-    console.log(formDataToSend);
+
     images.forEach((image, index) => {
       formDataToSend.append(`images`, image);
     });
-
+    console.log(...formDataToSend);
     try {
       const response = await axios.post(
-        "http://localhost:8800/api/uploadProduct",
+        `http://localhost:8800/api/uploadProduct`,
         formDataToSend
       );
 
@@ -67,6 +68,7 @@ const Admin = () => {
         product_brand: "",
         product_title: "",
         discount: "",
+        category: "dry_fruits",
         real_price: "",
         discount_price: "",
         sold_by: "",

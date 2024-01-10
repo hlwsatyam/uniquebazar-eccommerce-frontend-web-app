@@ -1,0 +1,26 @@
+import React from "react";
+import AccountSettingList from "./AccountSettingList/AccountSettingList";
+import Accountdata from "./AcountData/Accountdata";
+import AutoAccountDetails from "./AutoAccountDetails/AutoAccountDetails";
+
+const Customer = () => {
+  const UserData = {
+    first_name: "Satyam",
+    last_name: "Kumar",
+    email: "satyampandit021@gmail.com",
+    phone: "+918059424475",
+    gender: "0",
+    dob: "11-02-2002",
+  };
+  return (
+    <div className="my-3">
+      <div className="flex ">
+        <AccountSettingList UserData={UserData} />
+        <Accountdata UserData={UserData} />
+        {/* <AutoAccountDetails UserData={UserData} /> */}
+      </div>
+    </div>
+  );
+};
+
+export default Customer;

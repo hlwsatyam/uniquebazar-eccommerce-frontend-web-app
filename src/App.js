@@ -18,6 +18,7 @@ import Admin from "./pages/admin/Admin";
 import RecylingPolicy from "./pages/Legality/RecyclingPolicy/RecylingPolicy";
 import DeleveryPolicy from "./pages/Legality/DeleveryPolicy/DeleveryPolicy";
 import ReturnPolicy from "./pages/Legality/Return&cancellation/ReturnPolicy";
+import Customer from "./pages/Customer/Customer";
 const App = () => {
   const ToastCheck = () => {
     toast.error("Waiting for the action to complete...");
@@ -32,7 +33,6 @@ const App = () => {
           <Route path="/:category/:itemname/:itemno" element={<SignleItem />} />
           <Route path="/account/login" element={<Login />} />
           <Route path="/checkout/cart" element={<Cart />} />
-
           {/* terms */}
           <Route path="/about-us" element={<AboutUS />} />
           <Route path="/contact" element={<Contact />} />
@@ -46,6 +46,9 @@ const App = () => {
             element={<DeleveryPolicy />}
           />
           <Route path="/helpcentre" element={<Helpcenter />} />
+
+          {/* Customer */}
+          <Route path="/customer/profile" element={<Customer />} />
           {/* product upload By Admin */}
           <Route path="/admin" element={<Admin />} />
         </Routes>
