@@ -14,9 +14,10 @@ const Customer = () => {
   };
   return (
     <div className="my-3">
-      <div className="flex ">
-        <AccountSettingList UserData={UserData} />
-        <Accountdata UserData={UserData} />
+      <div className="flex">
+        <AccountSettingList className="w-[30%]" UserData={UserData} />
+        <Accountdata className="w-[70%]" UserData={UserData} />
+
         {/* <AutoAccountDetails UserData={UserData} /> */}
       </div>
     </div>

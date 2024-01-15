@@ -55,7 +55,7 @@ const TopProductList = () => {
   const CustomNextArrow = (props) => (
     <button
       {...props}
-      className="slick-arrow z-50 absolute top-1/2 right-4 bg-red-700 p-4  rounded-full transform -translate-y-1/2 text-black"
+      className="slick-arrow absolute top-1/2 right-4 bg-red-700 p-4  rounded-full  z-[1]  transform -translate-y-1/2 text-black"
     >
       <FaArrowRight className="text-white" />
     </button>
@@ -64,7 +64,7 @@ const TopProductList = () => {
   const CustomPrevArrow = (props) => (
     <button
       {...props}
-      className="slick-arrow  absolute top-1/2 left-4 transform bg-red-700 p-4 z-[999] rounded-full -translate-y-1/2 text-black"
+      className="slick-arrow  absolute top-1/2 left-4 transform bg-red-700 p-4 z-[1] rounded-full -translate-y-1/2 text-black"
     >
       <FaArrowLeft className="text-white" />
     </button>

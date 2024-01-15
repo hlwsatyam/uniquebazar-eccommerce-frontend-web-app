@@ -5,16 +5,15 @@ import TopProductList from "../Home/TopProduct/TopProductList";
 
 function Items() {
   const location = useLocation();
-  const { category } = useParams();
+  const { category, searchableText } = useParams();
 
   return (
     <div className="gap-x-3 my-4 flex">
       <Fiter />
-     <div className=" w-[88%]" >
-     <TopProductList/>
-     <TopProductList/>
-     
-     </div>
+      <div className=" w-[88%]">
+        <TopProductList />
+        <TopProductList />
+      </div>
     </div>
   );
 }

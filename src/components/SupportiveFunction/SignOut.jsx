@@ -30,7 +30,7 @@ export const SignOut = () => {
 const LogOut = ({ clickToCancel }) => {
   const [logOut, setLogout] = useState(false);
   return (
-    <div className=" border p-5 rounded-[12px] ">
+    <div className=" border p-5 bg-cyan-800 text-white rounded-[12px] ">
       <p className="font-bold text-xl "> Sign Out?</p>
       <p className="font-bold text-sm my-2">
         {" "}

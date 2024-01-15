@@ -7,9 +7,9 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { MdOutlineLiveHelp } from "react-icons/md";
 import { GrLogout } from "react-icons/gr";
 import { SignOut } from "../../../components/SupportiveFunction/SignOut";
-const AccountSettingList = ({ UserData }) => {
+const AccountSettingList = ({ UserData, ...style }) => {
   return (
-    <div>
+    <div {...style}>
       <div className="border p-3 rounded-[18px]">
         <p
           className="flex items-center justify-between gap-x-3 border-b-2

@@ -1,9 +1,15 @@
 import React from "react";
 import FaqQuestion from "./FaqQuestion/FaqData.json";
 import { GoQuestion } from "react-icons/go";
-const FAQ = () => {
+const FAQ = ({ viewFromAbout = true }) => {
   return (
-    <div className="my-4 ml-3 p-2 w-[80%] sm:w-[66%] bg-slate-300 shadow ">
+    <div
+      className={
+        viewFromAbout
+          ? "my-4  p-2 w-[100%] sm:w-[66%] bg-slate-300 shadow "
+          : "my-4  p-2 w-[100%] bg-slate-300 shadow"
+      }
+    >
       <p className="text-3xl font-semibold flex gap-x-2 items-center">
         FAQ <GoQuestion />{" "}
       </p>

@@ -2,28 +2,29 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { FaPlusSquare, FaMinusCircle } from "react-icons/fa";
 const Admin = () => {
   const [formData, setFormData] = useState({
     token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA0Nzg0MjY4LCJleHAiOjE3MTMzMzc4Njh9.7gYxQQpfGEFimZtdOhPfS0eJduGGjaHN460AWlA3jUc",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA1MDAyMDE4LCJleHAiOjE3MTM1NTU2MTh9.N5MUEqKssk07p2EdFXbiQGg5AgQd9PiJLG4I9-4NGfo",
     product_brand: "",
     product_title: "",
-    discount: "",
+    discount: "We Will Calculate!",
     real_price: "",
     discount_price: "",
-    sold_by: "",
-    feature_details: "",
-    category: "dry_fruits",
+    sold_by: "Rvbm",
+    feature_details: [{ key: "", value: "" }],
+    category: "",
     description: "",
-    product_information: "",
+    category: "",
+    product_informations: [{ key: "", value: "" }],
     return_time: "",
-    client_id: "",
     images: [],
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
@@ -45,7 +46,11 @@ const Admin = () => {
     const formDataToSend = new FormData();
 
     Object.entries(restFormData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
+      if (key === "feature_details" || key === "product_informations") {
+        formDataToSend.append(key, JSON.stringify(value));
+      } else {
+        formDataToSend.append(key, value);
+      }
     });
 
     images.forEach((image, index) => {
@@ -67,22 +72,84 @@ const Admin = () => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA0NzgxNjQwLCJleHAiOjE3MTMzMzUyNDB9.70hDzVEaE4RP_5mVe-O4SKhpTF9tDx0s-IF2bnHaAdE",
         product_brand: "",
         product_title: "",
-        discount: "",
-        category: "dry_fruits",
+        discount: "We will calculate!",
+        category: "",
         real_price: "",
         discount_price: "",
-        sold_by: "",
-        feature_details: "",
+        sold_by: "Rvbm",
+        category: "",
+        feature_details: [{ key: "", value: "" }],
         description: "",
-        product_information: "",
+        product_informations: [{ key: "", value: "" }],
         return_time: "",
-        client_id: "",
+
         images: [],
       });
     } catch (error) {
       console.error("Error uploading product:", error.message);
       alert("Error uploading product. Please check the console for details.");
     }
+  };
+
+  // const [keyValues, setKeyValues] = useState([{ key: "", value: "" }]);
+  // const [keyValues, setKeyValues] = useState([{ key: "", value: "" }]);
+
+  const featureDetailaddKeyValue = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      feature_details: [...formData.feature_details, { key: "", value: "" }],
+    }));
+  };
+
+  const featureDetailDeleteKeyValue = (index) => {
+    const newKeyValues = [...formData.feature_details];
+
+    newKeyValues.splice(index, 1);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      feature_details: newKeyValues,
+    }));
+    // setKeyValues(newKeyValues);
+  };
+
+  const featureDetailEditKeyValue = (index, field, newValue) => {
+    const newKeyValues = [...formData.feature_details];
+    newKeyValues[index][field] = newValue;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      feature_details: newKeyValues,
+    }));
+  };
+  const productInformationaddKeyValue = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      product_informations: [
+        ...formData.product_informations,
+        { key: "", value: "" },
+      ],
+    }));
+  };
+
+  const productInformationDeleteKeyValue = (index) => {
+    const newKeyValues = [...formData.product_informations];
+
+    newKeyValues.splice(index, 1);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      product_informations: newKeyValues,
+    }));
+    // setKeyValues(newKeyValues);
+  };
+ 
+  const productInformationEditKeyValue = (index, field, newValue) => {
+    const newKeyValues = [...formData.product_informations];
+    newKeyValues[index][field] = newValue;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      product_informations: newKeyValues,
+    }));
   };
 
   return (
@@ -126,6 +193,125 @@ const Admin = () => {
                   </div>
                 ))}
               </div>
+            ) : key === "feature_details" ? (
+              <div className="border-2 border-green-500  ">
+                {formData.feature_details.map((kv, index) => (
+                  <div key={index} className="border py-2">
+                    <p className="border my-2 flex items-center px-2 py-1">
+                      <button
+                        className="  "
+                        onClick={() => featureDetailDeleteKeyValue(index)}
+                      >
+                        <FaMinusCircle className="m-auto text-2xl" />
+                      </button>{" "}
+                      <input
+                        type="text"
+                        className="border font-bold p-2"
+                        placeholder="Key"
+                        value={kv.key}
+                        onChange={(e) =>
+                          featureDetailEditKeyValue(
+                            index,
+                            "key",
+                            e.target.value
+                          )
+                        }
+                      />
+                      <textarea
+                        type="text"
+                        className="border flex-1 p-2"
+                        placeholder="Value"
+                        value={kv.value}
+                        onChange={(e) =>
+                          featureDetailEditKeyValue(
+                            index,
+                            "value",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </p>
+                  </div>
+                ))}
+                <button
+                  className="w-full text-center"
+                  onClick={featureDetailaddKeyValue}
+                >
+                  {" "}
+                  <FaPlusSquare className="m-auto text-2xl" />
+                </button>
+              </div>
+            ) : key === "product_informations" ? (
+              <div className="border-2 border-green-500  ">
+                {formData.product_informations.map((kv, index) => (
+                  <div key={index} className="border py-2">
+                    <p className="border my-2 flex items-center px-2 py-1">
+                      <button
+                        className="  "
+                        onClick={() => productInformationDeleteKeyValue(index)}
+                      >
+                        <FaMinusCircle className="m-auto text-2xl" />
+                      </button>{" "}
+                      <input
+                        type="text"
+                        className="border font-bold p-2"
+                        placeholder="Key"
+                        value={kv.key}
+                        onChange={(e) =>
+                          productInformationEditKeyValue(
+                            index,
+                            "key",
+                            e.target.value
+                          )
+                        }
+                      />
+                      <textarea
+                        type="text"
+                        className="border flex-1 p-2"
+                        placeholder="Value"
+                        value={kv.value}
+                        onChange={(e) =>
+                          productInformationEditKeyValue(
+                            index,
+                            "value",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </p>
+                  </div>
+                ))}
+                <button
+                  className="w-full text-center"
+                  onClick={productInformationaddKeyValue}
+                >
+                  {" "}
+                  <FaPlusSquare className="m-auto text-2xl" />
+                </button>
+              </div>
+            ) : key === "category" ? (
+              <p className="my-2 border px-2 py-1 ">
+                <select
+                  onChange={handleInputChange}
+                  name="category"
+                  className="w-full my-2"
+                  id=""
+                >
+                  <option value="">Select</option>
+                  <option value="dry Fruits">dry Fruits</option>
+                  <option value="home care sheet">home care sheet</option>
+                  <option value="pulse">pulse (daal)</option>
+                  <option value="baby product">baby product</option>
+                  <option value="package food">package food</option>
+                  <option value="hair care">hair care</option>
+                  <option value="skin care">skin care</option>
+                  <option value="body care">body care</option>
+                  <option value="namkeen and biscuit">
+                    namkeen and biscuit
+                  </option>
+                  <option value="baby product">baby product</option>
+                </select>
+              </p>
             ) : (
               <input
                 type={typeof value === "number" ? "number" : "text"}
@@ -139,6 +325,7 @@ const Admin = () => {
             )}
           </div>
         ))}
+
         <button
           type="button"
           onClick={uploadProduct}

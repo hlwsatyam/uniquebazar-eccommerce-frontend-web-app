@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./pages/header/Header";
@@ -19,20 +19,27 @@ import RecylingPolicy from "./pages/Legality/RecyclingPolicy/RecylingPolicy";
 import DeleveryPolicy from "./pages/Legality/DeleveryPolicy/DeleveryPolicy";
 import ReturnPolicy from "./pages/Legality/Return&cancellation/ReturnPolicy";
 import Customer from "./pages/Customer/Customer";
+import { CookieConsent } from "./components/SupportiveFunction/CookieConsent";
+import Category from "./pages/Category/Category";
+
 const App = () => {
-  const ToastCheck = () => {
-    toast.error("Waiting for the action to complete...");
-  };
+  useEffect(() => {
+    CookieConsent();
+  }, []);
   return (
     <>
       <BrowserRouter>
+        <Toaster />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/:category" element={<Items />} />
+          <Route path="/categories" element={<Category />} />
           <Route path="/:category/:itemname/:itemno" element={<SignleItem />} />
           <Route path="/account/login" element={<Login />} />
           <Route path="/checkout/cart" element={<Cart />} />
+          {/* search */}
+          <Route path="/search/:searchableText" element={<Items />} />
           {/* terms */}
           <Route path="/about-us" element={<AboutUS />} />
           <Route path="/contact" element={<Contact />} />
@@ -54,7 +61,6 @@ const App = () => {
         </Routes>
       </BrowserRouter>
       <Footer />
-      <Toaster />
     </>
   );
 };
