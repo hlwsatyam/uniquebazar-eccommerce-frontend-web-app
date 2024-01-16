@@ -7,11 +7,19 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { MdOutlineLiveHelp } from "react-icons/md";
 import { GrLogout } from "react-icons/gr";
 import { SignOut } from "../../../components/SupportiveFunction/SignOut";
+import { useDispatch } from "react-redux";
+import { ProfileNavigationReducer } from "../../../Redux/Reducer";
+import { UserProfileNavigation } from "../../../Redux/Action";
 const AccountSettingList = ({ UserData, ...style }) => {
+  const dispatch=useDispatch()
+  const clickHandler=(route)=>{
+ 
+dispatch(UserProfileNavigation(route))
+  }
   return (
     <div {...style}>
       <div className="border p-3 rounded-[18px]">
-        <p
+        <p onClick={()=>clickHandler('userEditData')}
           className="flex items-center justify-between gap-x-3 border-b-2
         my-2 py-2"
         >
@@ -26,28 +34,28 @@ const AccountSettingList = ({ UserData, ...style }) => {
           </p>
           <IoIosArrowDroprightCircle className="bg-green-200 text-4xl cursor-pointer rounded-full text-green-500 " />
         </p>
-        <p
+        <p onClick={()=>clickHandler('myOrder')}
           className="flex items-center gap-x-2 border-b-2 cursor-pointer 
         my-2 py-2"
         >
           <FaBorderAll className="text-4xl  text-green-500 " />
           <span className="font-semibold ">My Orders</span>
         </p>
-        <p
+        <p onClick={()=>clickHandler('panCardInformation')}
           className="flex items-center gap-x-2 border-b-2 cursor-pointer 
         my-2 py-2"
         >
           <FaRegAddressCard className=" text-4xl  text-green-500 " />
           <span className="font-semibold ">PAN Card Information</span>
         </p>
-        <p
+        <p onClick={()=>clickHandler('DeliveryAddress')}
           className="flex items-center gap-x-2 border-b-2 cursor-pointer 
         my-2 py-2"
         >
           <MdOutlineAddLocationAlt className=" text-4xl rounded-full text-green-500 " />
           <span className="font-semibold ">Delivery Addressess</span>
         </p>
-        <p
+        <p  onClick={()=>clickHandler('needHelp')}
           className="flex items-center gap-x-2 border-b-2 cursor-pointer 
         my-2 py-2"
         >

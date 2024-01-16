@@ -2,8 +2,9 @@ import React from "react";
 import AccountSettingList from "./AccountSettingList/AccountSettingList";
 import Accountdata from "./AcountData/Accountdata";
 import AutoAccountDetails from "./AutoAccountDetails/AutoAccountDetails";
-
+import { useSelector } from "react-redux";
 const Customer = () => {
+  const NavigationTabVal=useSelector(s=>s.profileNavigatoreValue)
   const UserData = {
     first_name: "Satyam",
     last_name: "Kumar",
@@ -16,9 +17,10 @@ const Customer = () => {
     <div className="my-3">
       <div className="flex">
         <AccountSettingList className="w-[30%]" UserData={UserData} />
-        <Accountdata className="w-[70%]" UserData={UserData} />
-
-        {/* <AutoAccountDetails UserData={UserData} /> */}
+      {
+        NavigationTabVal===null?  <AutoAccountDetails  className="w-[70%]"  UserData={UserData} />:
+   <Accountdata NavigationTabVal={NavigationTabVal} className="w-[70%]" UserData={UserData} />
+       }     
       </div>
     </div>
   );

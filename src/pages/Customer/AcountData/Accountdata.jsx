@@ -5,16 +5,24 @@ import AddressDetails from "./AddressDetails/AddressDetails";
 import MyOrder from "./MyOrder/MyOrder";
 import FAQ from "../../Legality/FAQ/FAQ";
 
-const Accountdata = ({ UserData, ...style }) => {
+const AccountData = ({ UserData, NavigationTabVal, ...style }) => {
+  // Define a map for easier navigation
+  const componentsMap = {
+    userEditData: <ProfileDetails UserData={UserData} />,
+    myOrder: <MyOrder />,
+    panCardInformation: <PanCardInformation />,
+    DeliveryAddress: <AddressDetails />,
+    needHelp: <FAQ viewFromAbout={false} />
+  };
+
+  // Use the NavigationTabVal to select the appropriate component
+  const selectedComponent = componentsMap[NavigationTabVal] || null;
+
   return (
     <div {...style}>
-      {/* <ProfileDetails UserData={UserData} /> */}
-      {/* <PanCardInformation /> */}
-      {/* <AddressDetails /> */}
-      <MyOrder />
-      {/* <FAQ viewFromAbout={false} /> */}
+      {selectedComponent}
     </div>
   );
 };
 
-export default Accountdata;
+export default AccountData;

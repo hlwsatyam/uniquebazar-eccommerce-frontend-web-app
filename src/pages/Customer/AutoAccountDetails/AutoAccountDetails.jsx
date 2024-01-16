@@ -1,8 +1,8 @@
 import React from "react";
 
-const AutoAccountDetails = ({ UserData }) => {
+const AutoAccountDetails = ({ UserData ,...style}) => {
   return (
-    <div>
+    <div {...style} >
       <div className="p-4 rounded-[14px]  border">
         <p className="text-xl font-bold">Account Information</p>
         <div>

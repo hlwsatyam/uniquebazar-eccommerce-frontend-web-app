@@ -14,3 +14,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.thin-scroller{
+
+   
+    scrollbar-width: thin;
+  
+}
+::-webkit-scrollbar {
+width: 4px;
+  background: rgb(216, 216, 216);
+}

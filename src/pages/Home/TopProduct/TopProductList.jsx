@@ -4,18 +4,25 @@ import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  addToCartLocalHost,
+  getLatestCart,
+} from "../../../components/Fetchings/LocalHost";
 
-const TopProductList = () => {
+const TopProductList = ({ category, title, page = 1 }) => {
   const [items, setItems] = useState([]);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products");
+        const response = await axios.get(
+          `http://localhost:8800/api/latestproduct?page=1&categories%5B%5D=dry_fruits&categories%5B%5D=home_care&product_title=my_title `
+        );
         if (!response || !response.data || !Array.isArray(response.data)) {
           throw new Error("Invalid response format");
         }
+
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -24,27 +31,72 @@ const TopProductList = () => {
 
     fetchItems();
   }, []);
+  // const addToCart = (id) => {
+  //   addToCartLocalHost(id);
+  // };
+
+  const [cart, setCart] = useState(getLatestCart());
+
+  const addToCart = (productId) => {
+    const updatedCart = [...cart];
+    const index = updatedCart.findIndex((item) => item.id === productId);
+
+    if (index !== -1) {
+      // Remove item from cart if it already exists
+      updatedCart.splice(index, 1);
+    } else {
+      // Add item to cart if it doesn't exist
+      updatedCart.push({ id: productId /* other properties */ });
+    }
+
+    // Update the state and localStorage
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
   const renderCarouselItems = () => {
     return items.map((item) => (
       <div className="p-3  " key={item.id}>
         <div className="border h-[300px] p-2 rounded-[30px] ">
           <img
-            src={item.image}
+            src={`http://localhost:8800/uploads/${
+              JSON.parse(item.image_urls)[0]
+            }`}
             className="w-[200px] m-auto h-[200px]"
-            alt={item.title}
+            alt={item}
           />
           <div>
             <h3 className=" font-semibold overflow-hidden overflow-ellipsis whitespace-nowrap">
-              {item.title}
+              {item.product_title}
             </h3>
           </div>
           <div>
-            <h3 className="text-xl font-bold">₹{item.price}</h3>
+            <h3 className="text-xl font-bold">₹{item.discount_price}</h3>
           </div>
           <div>
-            <button className="border rounded-full w-full font-bold">
-              Add +
+            {/* {getLatestCart().includes(item.id) ? (
+              <button
+                onClick={() => addToCart(item.product_id)}
+                className="border rounded-full w-full font-bold"
+              >
+                Remove From Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => addToCart(item.product_id)}
+                className="border rounded-full w-full font-bold"
+              >
+                Add To Cart
+              </button>
+            )} */}
+
+            <button
+              onClick={() => addToCart(item.product_id)}
+              className="border rounded-full w-full font-bold"
+            >
+              {cart.map((cartItem) => cartItem.id).includes(item.product_id)
+                ? "Remove From Cart"
+                : "Add To Cart"}
             </button>
           </div>
         </div>

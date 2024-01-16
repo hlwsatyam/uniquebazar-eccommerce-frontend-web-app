@@ -10,7 +10,7 @@ import { IoMdSearch } from "react-icons/io";
 import { json, useNavigate } from "react-router-dom";
 const Search = ({ setSearchFn, Search }) => {
   return (
-    <div className="absolute top-[45px] border w-[300px] sm:w-full rounded-[12px] text-black p-3 bg-white min-h-[300px] left-[-90px] sm:left-0  ">
+    <div className="absolute top-[45px] border w-[300px] sm:w-full rounded-[12px] text-black p-3 bg-white min-h-[300px] left-[-90px] sm:left-0 z-10  ">
       {Search === "" ? (
         <BlankSearch setSearchFn={setSearchFn} />
       ) : (

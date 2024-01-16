@@ -110,7 +110,7 @@ const Header = () => {
 
   const SearchingStart = (e) => {
     setSearchableText(e.target.value.toLowerCase());
-    console.log(e.keyCode);
+   
   };
   const EnterExist = (e) => {
     if (e.key === "Escape") {
@@ -196,7 +196,7 @@ const Header = () => {
 
         {/* Responsive Navigation Menu */}
         {isMenuOpen && (
-          <div className="absolute left-0 top-0 min-h-screen py-3 shadow-2xl px-4 text-black bg-white w-[250px] ">
+          <div className="absolute thin-scroller z-10 left-0 top-0 max-h-screen overflow-y-scroll py-3 shadow-2xl px-4 text-black bg-white w-[250px] ">
             <div className="flex justify-around items-center bg-green-700 py-4 text-white">
               Hello! {}{" "}
               <Link
@@ -211,7 +211,7 @@ const Header = () => {
               <div className="">
                 <p className="text-sm font-bold my-3 "> {item.header} </p>
                 {item.childList.map((item) => (
-                  <Link
+                  <Link onClick={toggleMenu }
                     to={item.url}
                     className="flex border-b-2 py-2 my-3 text-xl items-center  gap-x-3"
                   >

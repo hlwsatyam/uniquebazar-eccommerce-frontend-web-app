@@ -7,11 +7,12 @@ const Cart = () => {
   return (
     <div>
       {" "}
-      {/* <EmptyCart /> */}
-      <div className="  sm:p-6 rev-responsive ">
+
+ <EmptyCart /> 
+      {/* <div className="  sm:p-6 rev-responsive ">
         <CartItems className="rev-rate-data w-[60%]" />
         <ProceedingCart className="comment-list  w-[40%] p-2" />
-      </div>
+      </div> */}
     </div>
   );
 };

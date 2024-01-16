@@ -24,7 +24,7 @@ const Admin = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+    alert(value)
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
@@ -298,8 +298,8 @@ const Admin = () => {
                   id=""
                 >
                   <option value="">Select</option>
-                  <option value="dry Fruits">dry Fruits</option>
-                  <option value="home care sheet">home care sheet</option>
+                  <option value="dry_fruits">dry Fruits</option>
+                  <option value="home_care">home care sheet</option>
                   <option value="pulse">pulse (daal)</option>
                   <option value="baby product">baby product</option>
                   <option value="package food">package food</option>
